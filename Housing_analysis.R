@@ -104,3 +104,12 @@ ggplot(data = data.frame(y_test, predictions_xgb), aes(x = y_test, y = predictio
   ggtitle("XGBoost Regression Plot") +
   xlab("Actual Price (millions)") + 
   ylab("Predicted Price (millions)")
+
+
+model <- lm(price ~ poly(area, 2), data = train_data)
+
+predictions <- predict(model, newdata = test_data)
+
+plot(test_data$area, test_data$price, col = "blue", main = "Actual vs Predicted Prices (Polynomial Regression)")
+lines(test_data$area, predictions, col = "red")
+legend("topright", legend = c("Actual", "Predicted"), col = c("blue", "red"), lty = 1)
